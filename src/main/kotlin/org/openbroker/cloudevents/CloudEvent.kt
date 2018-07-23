@@ -1,5 +1,6 @@
 package org.openbroker.cloudevents
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
@@ -11,7 +12,7 @@ import java.util.UUID
  * Tries to model version 0.1 of Cloud Events
  * https://github.com/cloudevents/spec/blob/v0.1/spec.md#context-attributes
  */
-data class CloudEvent<T>(
+data class CloudEvent<T> @JsonCreator(mode=JsonCreator.Mode.PROPERTIES) constructor(
     /**
      * Type of occurrence which has happened. Often this property
      * is used for routing, observability, policy enforcement, etc.
