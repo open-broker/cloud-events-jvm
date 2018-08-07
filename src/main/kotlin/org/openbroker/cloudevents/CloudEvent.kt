@@ -1,18 +1,17 @@
 package org.openbroker.cloudevents
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
-import java.util.UUID
+import java.util.*
 
 /**
  * Tries to model version 0.1 of Cloud Events
  * https://github.com/cloudevents/spec/blob/v0.1/spec.md#context-attributes
  */
-data class CloudEvent<T> @JsonCreator(mode=JsonCreator.Mode.PROPERTIES) constructor(
+data class CloudEvent<T> @JvmOverloads constructor(
     /**
      * Type of occurrence which has happened. Often this property
      * is used for routing, observability, policy enforcement, etc.
@@ -82,6 +81,7 @@ data class CloudEvent<T> @JsonCreator(mode=JsonCreator.Mode.PROPERTIES) construc
      * the primary constructor and which accepts a timestamp in form
      * of an [Instant].
      */
+    @JvmOverloads
     constructor(
         eventType: String,
         eventTypeVersion: String? = null,
