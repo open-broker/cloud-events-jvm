@@ -6,6 +6,8 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.*
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 /**
  * Tries to model version 0.1 of Cloud Events
@@ -142,6 +144,7 @@ private val date = Regex("$year-$month-$day")
 private val time = Regex("$hour:$minutes:$seconds($milliSeconds)?")
 
 private val rfc3339Regex = Regex("^${date}T$time$zoneOffset\$")
+private val rfc3339Formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
 fun validateEventTime(timestamp: String) {
     require(timestamp.matches(rfc3339Regex)) {
@@ -151,7 +154,7 @@ fun validateEventTime(timestamp: String) {
 
 fun parseEventTime(timestamp: String): Instant {
     validateEventTime(timestamp)
-    return Instant.parse(timestamp)
+    return ZonedDateTime.parse(timestamp, rfc3339Formatter).toInstant()
 }
 
 fun parseEventTime(timestamp: OffsetDateTime): String = timestamp.toString()
