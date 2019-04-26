@@ -1,18 +1,20 @@
 package org.openbroker.cloudevents
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
-import java.util.*
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * Tries to model version 0.1 of Cloud Events
  * https://github.com/cloudevents/spec/blob/v0.1/spec.md#context-attributes
  */
+@JsonIgnoreProperties(ignoreUnknown = false)
 data class CloudEvent<T> @JvmOverloads constructor(
     /**
      * Type of occurrence which has happened. Often this property

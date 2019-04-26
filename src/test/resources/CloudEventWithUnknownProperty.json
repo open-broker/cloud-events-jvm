@@ -1,0 +1,16 @@
+{
+  "eventType": "io.klira.VoiceEvent",
+  "eventTypeVersion": "1.0",
+  "cloudEventsVersion": "0.1",
+  "source": "/station/jupiter/DiscoveryOne/HAL9000",
+  "eventID": "AAABYyvMcXysEwAHAAAAAA",
+  "eventTime": "2001-06-19T14:28:36Z",
+  "schemaURL": "https://klira.io/someURL",
+  "contentType": "text/plain",
+  "extensions": {
+    "authorized": true,
+    "authorizationLevel": 1024
+  },
+  "unknownProperty": 1,
+  "data": "I’m sorry, Dave. I’m afraid I can’t do that."
+}
