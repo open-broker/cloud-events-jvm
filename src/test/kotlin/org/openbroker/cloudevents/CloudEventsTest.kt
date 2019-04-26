@@ -1,7 +1,11 @@
 package org.openbroker.cloudevents
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.io.File
 
 class CloudEventTest {
     @Test
@@ -27,4 +31,28 @@ class CloudEventTest {
 
         assertEquals(event, deserialized)
     }
+
+    @Test
+    fun testCloudEventSerializationFailOnUnknownPropertyInCloudEventMetaData() {
+        val json = loadJson("CloudEventWithUnknownProperty")
+        assertThrows<UnrecognizedPropertyException> {
+            cloudEvent<String>(json, jacksonObjectMapper())
+        }
+    }
+
+    @Test
+    fun testCloudEventSerializationDoNotFailOnUnknownPropertyInCloudEventData() {
+        val json = loadJson("CloudEventWithUnknownPropertyInPayload")
+        val deserialized: CloudEvent<ComplexClass> = cloudEvent(json)
+        assertEquals(1, deserialized.data!!.a)
+        assertEquals(2, deserialized.data!!.b)
+    }
+}
+
+private const val JSON_PATH = "src/test/resources"
+
+private fun loadJson(file: String): String {
+    val completeFile = File("$JSON_PATH/$file.json")
+    require(completeFile.exists()) { "File cannot be found: $file.json" }
+    return completeFile.readText()
 }
