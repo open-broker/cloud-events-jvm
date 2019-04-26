@@ -60,7 +60,7 @@ test {
     useJUnitPlatform()
 }
 
-task wrapper(type: Wrapper) {
+wrapper {
     description = 'Generates gradlew[.bat] scripts for faster execution'
     gradleVersion = '5.2.1'
 }
