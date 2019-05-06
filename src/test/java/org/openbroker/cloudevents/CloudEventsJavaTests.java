@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CloudEventsJavaTests {
+class CloudEventsJavaTests {
 
     @Test
-    public void testCloudEventSerializationSimpleType() {
-        CloudEvent<String> event = new CloudEvent<String>(
+    void testCloudEventSerializationSimpleType() {
+        CloudEvent<String> event = new CloudEvent<>(
             "io.klira.VoiceEvent",
             "1.0",
             "0.1",
@@ -29,8 +29,8 @@ public class CloudEventsJavaTests {
     }
 
     @Test
-    public void testCloudEventSerializationComplexType() throws JsonProcessingException {
-        CloudEvent<ComplexClass> event = new CloudEvent<ComplexClass>(
+    void testCloudEventSerializationComplexType() throws JsonProcessingException {
+        CloudEvent<ComplexClass> event = new CloudEvent<>(
             "io.klira.VoiceEvent",
             "1.0",
             "0.1",
