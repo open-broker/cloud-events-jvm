@@ -10,7 +10,7 @@ import java.io.File
 class CloudEventTest {
     @Test
     fun testCloudEventSerialization() {
-        val event = CloudEvent<String>(
+        val event = CloudEvent(
             eventType = "io.klira.VoiceEvent",
             eventTypeVersion = "1.0",
             cloudEventsVersion = "0.1",
@@ -27,7 +27,7 @@ class CloudEventTest {
         )
 
         val json: String = jsonString(event)
-        val deserialized: CloudEvent<String> = cloudEvent<String>(json)
+        val deserialized: CloudEvent<String> = cloudEvent(json)
 
         assertEquals(event, deserialized)
     }
