@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.io.File
 
-class CloudEventTest {
+class CloudEventsTest {
     @Test
     fun testCloudEventSerialization() {
         val event = CloudEvent(
