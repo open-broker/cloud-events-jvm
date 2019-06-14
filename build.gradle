@@ -22,7 +22,6 @@ ext {
     ]
 
     servicePackage = 'org.openbroker.cloudevents'
-    servicePackageSlashes = servicePackage.replace('.', '/')
 }
 
 sourceCompatibility = jdkVersion
@@ -90,7 +89,7 @@ test {
     reports.html.enabled false
 
     failFast = System.getProperty('failFast') != null
-    include servicePackageSlashes + '/**/*Test.*'
+    include servicePackage.replace('.', '/') + '/**/*Test.*'
 
     testLogging {
         events 'skipped', 'failed'
