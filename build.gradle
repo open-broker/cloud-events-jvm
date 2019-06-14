@@ -28,6 +28,12 @@ sourceCompatibility = jdkVersion
 targetCompatibility = jdkVersion
 
 repositories {
+    maven {
+        url "https://jitpack.io"
+        content {
+            includeGroupByRegex 'com\\.(github|gitlab|gitee).*'
+        }
+    }
     jcenter()
     mavenCentral()
 }
