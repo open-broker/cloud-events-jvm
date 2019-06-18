@@ -53,6 +53,7 @@ dependencies {
         platform("org.junit:junit-bom:$ver.junit"),
         "org.junit.jupiter:junit-jupiter-api"
     )
+    
     testRuntime(
         "org.junit.jupiter:junit-jupiter-engine"
     )
@@ -60,9 +61,9 @@ dependencies {
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
-        javaParameters = true
+        javaParameters = true   // Useful for reflection.
         jvmTarget = jdkVersion
-        freeCompilerArgs += ['-Xjsr305=strict', '-progressive']
+        freeCompilerArgs += ['-progressive']
         languageVersion = kotlinLanguageVersion
         apiVersion = kotlinLanguageVersion
     }
@@ -91,10 +92,8 @@ test {
 
     useJUnitPlatform()
 
-    reports.junitXml.enabled false
     reports.html.enabled false
 
-    failFast = System.getProperty('failFast') != null
     include servicePackage.replace('.', '/') + '/**/*Test.*'
 
     testLogging {
