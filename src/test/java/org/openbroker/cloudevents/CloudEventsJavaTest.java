@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CloudEventsJavaTest {
 
@@ -44,7 +44,7 @@ class CloudEventsJavaTest {
 
         String json = new ObjectMapper().writeValueAsString(event);
         CloudEvent<ComplexClass> deserialized = SerializationKt.cloudEvent(json, ComplexClass.class);
-        assertNotNull(deserialized.getData());
+        assertTrue(deserialized.getData() instanceof ComplexClass);
         assertEquals(event, deserialized);
     }
 }
