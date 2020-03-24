@@ -2,12 +2,24 @@ package org.openbroker.cloudevents;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CloudEventsJavaTests {
+
+    @Test
+    public void testCloudEventCreationAtExactMinuteTime() {
+        String type = "test.Event";
+        String version = "1.0";
+        String source = "test.source";
+        Instant timestamp = Instant.parse("2020-03-06T08:14:00Z");
+        Assertions.assertDoesNotThrow(() -> new CloudEvent<>(type, version, source, timestamp, null));
+    }
 
     @Test
     public void testCloudEventSerializationSimpleType() {

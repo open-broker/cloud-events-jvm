@@ -159,7 +159,7 @@ fun parseEventTime(timestamp: String): Instant {
     return ZonedDateTime.parse(timestamp, rfc3339Formatter).toInstant()
 }
 
-fun parseEventTime(timestamp: OffsetDateTime): String = timestamp.toString()
+fun parseEventTime(timestamp: OffsetDateTime): String = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(timestamp)
 
 fun parseEventTime(timestamp: LocalDateTime, timeZone: ZoneId = ZoneId.systemDefault()): String {
     val dateWithOffset = OffsetDateTime.of(timestamp, timeZone.offset())
