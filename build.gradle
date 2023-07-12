@@ -1,5 +1,6 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.3.30"
+    id 'maven-publish'
 }
 
 apply plugin: 'kotlin'
@@ -8,7 +9,7 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 
 group = 'org.openbroker'
-version = '1.0-SNAPSHOT'
+version = '1.0.0'
 description = 'Library for cloud events'
 
 defaultTasks 'test'
@@ -63,4 +64,21 @@ test {
 wrapper {
     description = 'Generates gradlew[.bat] scripts for faster execution'
     gradleVersion = '5.2.1'
+}
+
+publishing {
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/open-broker/cloud-events-jvm")
+            credentials {
+                username = System.getenv("GITHUB_PACKAGES_USERNAME")
+                password = System.getenv("GITHUB_PACKAGES_PASSWORD")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from components.java
+        }
+    }
 }
